@@ -25,6 +25,8 @@ export default function Battle({
   const [target, setTarget] = useState(0);
   const [showResults, setShowResults] = useState(false);
 
+  const [battleStarted, setBattleStarted] = useState(false);
+
   const [loaded, setLoaded] = useState(false);
   const prevLevel = usePrevious(player.level);
 
@@ -167,6 +169,8 @@ export default function Battle({
 
   function startBattle() {
     ATB.setRunning(true);
+
+    setBattleStarted(true);
   }
 
   function pauseBattle() {}
@@ -304,12 +308,27 @@ export default function Battle({
             }}
           ></div>
           <div className="fade-in"></div>
-          <button
-            style={{ position: "relative" }}
-            onClick={() => startBattle()}
+          <div
+            style={{
+              display: "flex",
+
+              justifyContent: "center",
+            }}
           >
-            Start Battle
-          </button>
+            <button
+              className="start-game-btn"
+              style={{
+                bottom: "40%",
+                display: battleStarted ? "none" : "false",
+              }}
+              onClick={() => startBattle()}
+            >
+              <h2>Start Battle</h2>
+            </button>
+          </div>
+          {/* 
+          
+          DEV BUTTONS
           <button
             style={{ position: "relative" }}
             onClick={(e) => pauseBattle()}
@@ -331,7 +350,7 @@ export default function Battle({
             }
           >
             Escape Battle
-          </button>
+          </button> */}
           {showResults && player.curHP > 0 && renderWin()}
           {showResults && player.curHP <= 0 && renderLoss()}
 
