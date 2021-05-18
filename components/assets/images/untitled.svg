@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 640" width="120" height="120">
+    <defs>
+        <path d="M502.09 79.44C520.65 79.44 535.7 94.49 535.7 113.05C535.7 186.18 535.7 389.17 535.7 466.6C535.7 473.26 530.3 478.67 523.63 478.67C441.67 478.67 206.18 478.67 123.81 478.67C118.28 478.67 113.81 474.19 113.81 468.67C113.81 390.82 113.81 189.49 113.81 117.19C113.81 96.34 130.71 79.44 151.56 79.44C228.38 79.44 424.43 79.44 502.09 79.44Z" id="b2Xdyg2OOL"></path>
+        <linearGradient id="gradientbe3IMzVoI" gradientUnits="userSpaceOnUse" x1="324.75" y1="79.44" x2="324.75" y2="478.67">
+            <stop style="stop-color: #ffffff;stop-opacity: 0" offset="0%"></stop>
+            <stop style="stop-color: #010000;stop-opacity: 1" offset="100%"></stop>
+        </linearGradient>
+        <path d="M535.7 475.01C535.7 532.31 441.18 578.84 324.75 578.84C208.33 578.84 113.81 532.31 113.81 475.01C113.81 417.71 208.33 371.18 324.75 371.18C441.18 371.18 535.7 417.71 535.7 475.01Z" id="c1PqeeCDcU"></path>
+    </defs>
+    <g>
+        <g>
+            <g>
+                <use xlink:href="#b2Xdyg2OOL" opacity="0.4" fill="url(#gradientbe3IMzVoI)"></use>
+                <g>
+                    <use xlink:href="#b2Xdyg2OOL" opacity="0.4" fill-opacity="0" stroke="#4d51ca" stroke-width="0" stroke-opacity="1"></use>
+                </g>
+            </g>
+            <g>
+                <use xlink:href="#c1PqeeCDcU" opacity="1" fill="#333333" fill-opacity="1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
