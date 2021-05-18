@@ -48,7 +48,7 @@ export default function Player({
   const mappedAbilities = player.abilities.map((ability, index) => {
     if (index === 1) {
       const isActive = () => {
-        if (player.special > 100 && ATB.players[0].active) {
+        if (player.special > 100 && ATB.players[0].active && !damageTaken) {
           return false;
         } else {
           return true;
@@ -76,7 +76,7 @@ export default function Player({
 
     return (
       <button
-        disabled={!ATB.players[0].active}
+        disabled={!ATB.players[0].active || damageTaken}
         onClick={(e) => handleAttack(e, ability)}
         key={index}
         className="ability"

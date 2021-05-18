@@ -19,6 +19,7 @@ import Battle from "./Battle";
 // Stat sheet
 import StatSheet from "./mainscene/StatSheet";
 import TalentTree from "./mainscene/TalentTree";
+import CommunityStats from "./mainscene/CommunityStats";
 
 export default function MainScene({ player, setPlayer }) {
   const [enemies, setEnemies] = useState([]);
@@ -114,6 +115,7 @@ export default function MainScene({ player, setPlayer }) {
             </div>
 
             <StatSheet player={player} />
+            <CommunityStats player={player} />
 
             <TalentTree player={player} setPlayer={setPlayer} />
           </div>
