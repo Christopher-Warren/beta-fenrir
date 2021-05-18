@@ -4,6 +4,8 @@ import Player from "./battle/Player";
 import Enemies from "./battle/Enemies";
 import useATB from "../utils/battle/useATB";
 
+import usePrevious from "../utils/battle/usePrevious";
+
 import toBoss from "../assets/images/mainscene/to-boss.png";
 
 import ExpBar from "../scenes/battle/uicomponents/ExpBar";
@@ -22,8 +24,11 @@ export default function Battle({
   // so most current state is accessable.
   const [target, setTarget] = useState(0);
   const [showResults, setShowResults] = useState(false);
-  const resultsRef = useRef(null);
+
   const [loaded, setLoaded] = useState(false);
+  const prevLevel = usePrevious(player.level);
+
+  const currentLevel = useRef(player.level);
 
   const experienceRef = useRef(null);
 
@@ -50,7 +55,7 @@ export default function Battle({
       return {
         ...player,
         inBattle: false,
-        curHP: Math.ceil(player.curHP + player.curHP * 0.2),
+        curHP: player.maxHP,
       };
     });
   };
@@ -68,7 +73,6 @@ export default function Battle({
         inBattle: false,
         level: player.level === 1 ? 1 : player.level - 1,
         talentArr: resetPoints,
-        talentPoints: player.level === 1 ? 1 : player.level - 1,
       };
     });
   };
@@ -93,11 +97,9 @@ export default function Battle({
 
     if (enemies.every((enemy) => enemy.curHP <= 0)) {
       ATB.setRunning(false);
-      console.log("battle ended");
     }
 
     if (enemies.every(({ curHP }) => curHP <= 0)) {
-      console.log("Show end of battle =>");
       setShowResults(true);
     }
 
@@ -106,6 +108,7 @@ export default function Battle({
 
   // Handles adding experience to the
   // player after battle
+  //
   useEffect(() => {
     if (showResults && player.curHP > 0) {
       if (location === "boss") {
@@ -190,13 +193,8 @@ export default function Battle({
         }}
       >
         <h1>Battle Won!</h1>
-        <p>You earned {experienceRef.current} experience!</p>
-        <p>
-          {player.experienceToLevel - player.experience} experience needed to
-          level.
-        </p>
-        <ExpBar player={player}></ExpBar>
 
+        {renderExperience()}
         <button
           className="to-boss-btn"
           onClick={() => handleWin()}
@@ -215,6 +213,29 @@ export default function Battle({
           ></img>
           <h2>Main Room</h2>
         </button>
+      </div>
+    );
+  };
+  //
+  const renderExperience = () => {
+    // experience problem bug, player gaining experience after leveling
+    if (player.level > currentLevel.current) {
+      return (
+        <div>
+          <p>You leveled up!!</p>
+          <p>You have earned a talent point.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <p>You earned {experienceRef.current} experience!</p>
+        <p>
+          {player.experienceToLevel - player.experience} experience needed to
+          level.
+        </p>
+        <ExpBar player={player}></ExpBar>
       </div>
     );
   };
@@ -239,10 +260,9 @@ export default function Battle({
         <h1>Defeated</h1>
 
         <p>
-          A mysterous force has revived you, however, you feel weaker... your
-          talents have been reset
+          A mysterous force has revived you, however, you feel weaker... and
+          your talents have been reset
         </p>
-        <ExpBar player={player}></ExpBar>
 
         <button
           className="to-boss-btn"

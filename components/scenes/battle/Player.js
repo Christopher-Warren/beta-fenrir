@@ -247,7 +247,7 @@ export default function Player({
   }, [player.curHP, player.maxHP, prevHP]);
 
   return (
-    <div className="player-container">
+    <div className="player-container" style={{ zIndex: "50" }}>
       <div className="player-wrapper">
         <div className="player-card">
           <p style={{ margin: "0", width: "100%", textAlign: "center" }}>

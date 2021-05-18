@@ -6,7 +6,7 @@
 
 function expYieldFormula(level) {
   //                           V change
-  return Math.round(Math.floor(10 * Math.pow(level, 1.5) * 1.5));
+  return Math.round(Math.floor(10 * Math.pow(level, 1.5) * 4));
 }
 
 function hpFormula(level, base, multiplier) {
@@ -34,25 +34,68 @@ function spiritFormula(level, base, multiplier) {
 }
 
 const statFormulas = {
-  calcExpYield(level) {
-    return expYieldFormula(level);
+  calcExpYield(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
+
+    return expYieldFormula(level * multiplier);
   },
-  calcMaxHP(level) {
-    return hpFormula(level, 50, 1);
+  calcMaxHP(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
+    return hpFormula(level, 50, multiplier);
   },
-  calcAttack(level) {
-    return attackFormula(level, 20, 1);
+  calcAttack(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
+    return attackFormula(level, 20, multiplier);
   },
-  calcSpellpower(level) {
-    return attackFormula(level, 20, 1);
+  calcSpellpower(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
+    return attackFormula(level, 20, multiplier);
   },
-  calcArmor(level) {
-    return armorFormula(level, 10, 1);
+  calcArmor(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
+    return armorFormula(level, 10, multiplier);
   },
-  calcSpirit(level) {
-    return spiritFormula(level, 10, 1);
+  calcSpirit(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
+    return spiritFormula(level, 10, multiplier);
   },
-  calcSpeed(level) {
+  calcSpeed(level, boss) {
+    let multiplier;
+    if (boss) {
+      multiplier = 4;
+    } else {
+      multiplier = 1;
+    }
     return speedFormula(level, 1.5);
   },
 };

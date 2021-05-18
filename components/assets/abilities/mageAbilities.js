@@ -17,7 +17,7 @@ export const mageAbilities = [
         return prevState.map((enemy, index) => {
           if (target === index) {
             const damage = Math.round(
-              player.attack -
+              player.spellpower -
                 (enemy.armor / 10) * Math.floor(Math.random() * 3 + 1)
             );
 
@@ -55,7 +55,7 @@ export const mageAbilities = [
       setEnemies((prevState) => {
         return prevState.map((enemy, index) => {
           const damage = Math.round(
-            player.attack * 1.3 -
+            player.spellpower * 1.3 -
               (enemy.armor / 10) * Math.floor(Math.random() * 3 + 1)
           );
 

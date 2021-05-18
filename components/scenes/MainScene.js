@@ -43,7 +43,7 @@ export default function MainScene({ player, setPlayer }) {
     player.level,
     player.bossStage
   );
-  console.log(player);
+
   const startBattle = (e, group) => {
     e.preventDefault();
 
@@ -55,7 +55,9 @@ export default function MainScene({ player, setPlayer }) {
   };
 
   const renderEventButtons = () => {
-    const mappedEnemies = groupOfEnemies.map((group, index) => {
+    const mappedEnemies = groupOfEnemies.map((group, index, arr) => {
+      const added = group.reduce((a, b) => a + b.level, 0);
+
       return (
         <button
           key={index}
@@ -69,9 +71,17 @@ export default function MainScene({ player, setPlayer }) {
             alt="obelisk"
             onClick={(e) => startBattle(e, group)}
           />
-          <h2>
+          {/* <h2>
             Enemies:
             <br /> {group.length}
+          </h2> */}
+          <h2>
+            Difficulty:
+            <br />{" "}
+            {Math.round(
+              (Math.round((added / group.length) * 10) * group.length) /
+                player.level
+            )}
           </h2>
         </button>
       );

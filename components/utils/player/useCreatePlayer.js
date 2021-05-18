@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import statFormulas from "../formulas/playerStatFormulas";
+import usePrevious from "../battle/usePrevious";
 
 export default function useCreatePlayer() {
   const [createPlayer, setCreatePlayer] = useState({});
   const firstUpdate = useRef(true);
   const firstUpdateTalent = useRef(true);
   // @TODO: Add modifiers for player class.
+
+  const prevLevel = usePrevious(createPlayer.level);
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -59,12 +62,29 @@ export default function useCreatePlayer() {
       return;
     }
 
-    setCreatePlayer((prevState) => {
-      return {
-        ...prevState,
-        talentPoints: prevState.talentPoints + 1,
-      };
-    });
+    if (createPlayer.level > prevLevel) {
+      setCreatePlayer((prevState) => {
+        return {
+          ...prevState,
+          talentPoints: prevState.talentPoints + 1,
+        };
+      });
+    } else if (createPlayer.level < prevLevel) {
+      console.log("less");
+      setCreatePlayer((prevState) => {
+        return {
+          ...prevState,
+          talentPoints: prevState.level,
+        };
+      });
+    } else {
+      setCreatePlayer((prevState) => {
+        return {
+          ...prevState,
+          talentPoints: prevState.level,
+        };
+      });
+    }
   }, [createPlayer.level]);
 
   return [createPlayer, setCreatePlayer];

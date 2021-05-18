@@ -150,7 +150,7 @@ const statFormulas = {
     }
     switch (playerClass) {
       case "warrior":
-        return speedFormula(level, 10, 1.5, talentMultiplier);
+        return speedFormula(level, 10, 2, talentMultiplier);
 
       case "rogue":
         return speedFormula(level, 10, 1.7, talentMultiplier);
@@ -166,7 +166,7 @@ const statFormulas = {
     }
     switch (playerClass) {
       case "mage":
-        return spellpowerFormula(level, 20, 1.5, talentMultiplier);
+        return spellpowerFormula(level, 20, 2, talentMultiplier);
 
       default:
         return spellpowerFormula(level, 10, 1, talentMultiplier);

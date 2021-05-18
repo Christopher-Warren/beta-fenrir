@@ -21,7 +21,7 @@ export default function useGenerateBoss(
         let randomGroup = [];
 
         randomGroup.push(
-          scaledEnemies(playerLevel, bossStage)[
+          scaledEnemies(playerLevel, bossStage, true)[
             Math.floor(Math.random() * bosses.length)
           ]
         );

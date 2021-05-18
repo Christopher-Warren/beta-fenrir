@@ -7,7 +7,7 @@ export const CreateWarrior = {
   classImg: "/sprites/select/warrior_select.png",
   name: "Almith",
   level: 20,
-  talentPoints: 0,
+  talentPoints: 1,
   talentArr: [
     {
       name: "+5% HP",
@@ -110,7 +110,7 @@ export const CreateRogue = {
   classImg: "/sprites/select/rogue_select.png",
   name: "Almith",
   level: 1,
-  talentPoints: 0,
+  talentPoints: 1,
   talentArr: [
     {
       name: "+5% HP",
@@ -214,7 +214,7 @@ export const CreateMage = {
   classImg: "/sprites/select/mage_select.png",
   name: "Almith",
   level: 1,
-  talentPoints: 0,
+  talentPoints: 1,
   talentArr: [
     {
       name: "+5% HP",

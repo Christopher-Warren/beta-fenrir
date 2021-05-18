@@ -7,21 +7,21 @@ import getEnemies from "./getEnemies";
  
   @returns {Array.<object>} Array of objects containing ALL enemies, with their stats scaled to the player.
   **/
-function scaledEnemies(playerLevel, bossStage) {
+function scaledEnemies(playerLevel, bossStage, isBoss) {
   const mappedEnemies = getEnemies(playerLevel, bossStage).map((enemy) => {
     // this is where stats will differ based off enemy type/name
 
     return {
       ...enemy,
-      expYield: enemyStatFormulas.calcExpYield(enemy.level),
-      maxHP: enemyStatFormulas.calcMaxHP(enemy.level),
-      curHP: enemyStatFormulas.calcMaxHP(enemy.level),
-      armor: enemyStatFormulas.calcArmor(enemy.level),
-      spirit: enemyStatFormulas.calcSpirit(enemy.level),
+      expYield: enemyStatFormulas.calcExpYield(enemy.level, isBoss),
+      maxHP: enemyStatFormulas.calcMaxHP(enemy.level, isBoss),
+      curHP: enemyStatFormulas.calcMaxHP(enemy.level, isBoss),
+      armor: enemyStatFormulas.calcArmor(enemy.level, isBoss),
+      spirit: enemyStatFormulas.calcSpirit(enemy.level, isBoss),
       mana: 50,
-      attack: enemyStatFormulas.calcAttack(enemy.level),
-      spellpower: enemyStatFormulas.calcSpellpower(enemy.level),
-      speed: enemyStatFormulas.calcSpeed(enemy.level),
+      attack: enemyStatFormulas.calcAttack(enemy.level, isBoss),
+      spellpower: enemyStatFormulas.calcSpellpower(enemy.level, isBoss),
+      speed: enemyStatFormulas.calcSpeed(enemy.level, isBoss),
     };
   });
 
