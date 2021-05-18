@@ -1,5 +1,5 @@
 {
-  "name": "with-mongodb-mongoose",
+  "name": "fenrir-beta",
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
