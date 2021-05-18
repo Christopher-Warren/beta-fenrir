@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import axios from "axios";
 import Player from "./battle/Player";
 import Enemies from "./battle/Enemies";
 import useATB from "../utils/battle/useATB";
@@ -39,6 +39,39 @@ export default function Battle({
     });
     spriteSheetRefArr.current = arr;
   }
+
+  const handleWin = async () => {
+    if (location === "boss") {
+      await axios.post("/api/stats/bossesKilled");
+    }
+    await axios.post("/api/stats/battlesWon");
+
+    setPlayer((player) => {
+      return {
+        ...player,
+        inBattle: false,
+        curHP: Math.ceil(player.curHP + player.curHP * 0.2),
+      };
+    });
+  };
+
+  const handleLoss = async () => {
+    await axios.post("/api/stats/deaths");
+
+    const resetPoints = player.talentArr.map((talent) => {
+      return { ...talent, points: 0 };
+    });
+
+    setPlayer((player) => {
+      return {
+        ...player,
+        inBattle: false,
+        level: player.level === 1 ? 1 : player.level - 1,
+        talentArr: resetPoints,
+        talentPoints: player.level === 1 ? 1 : player.level - 1,
+      };
+    });
+  };
 
   useEffect(() => {
     if (loadedSpriteSheetRefArr.current.length === 0) {
@@ -166,15 +199,7 @@ export default function Battle({
 
         <button
           className="to-boss-btn"
-          onClick={() =>
-            setPlayer((player) => {
-              return {
-                ...player,
-                inBattle: false,
-                curHP: Math.ceil(player.curHP + player.curHP * 0.2),
-              };
-            })
-          }
+          onClick={() => handleWin()}
           style={{ position: "initial" }}
         >
           <img
@@ -221,21 +246,7 @@ export default function Battle({
 
         <button
           className="to-boss-btn"
-          onClick={() => {
-            const resetPoints = player.talentArr.map((talent) => {
-              return { ...talent, points: 0 };
-            });
-
-            setPlayer((player) => {
-              return {
-                ...player,
-                inBattle: false,
-                level: player.level === 1 ? 1 : player.level - 1,
-                talentArr: resetPoints,
-                talentPoints: player.level === 1 ? 1 : player.level - 1,
-              };
-            });
-          }}
+          onClick={() => handleLoss()}
           style={{ position: "initial" }}
         >
           <img

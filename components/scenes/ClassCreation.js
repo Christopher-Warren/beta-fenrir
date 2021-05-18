@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import MainScene from "./MainScene";
 import useCreatePlayer from "../utils/player/useCreatePlayer";
 
+import axios from "axios";
+
 import background from "../assets/images/mainscene/background.png";
 
 import warriorImg from "../assets/images/select/warrior_select.png";
@@ -21,11 +23,13 @@ export default function CharacterSelect() {
 
   const [modal, setModal] = useState(true);
 
-  function handleClassSelection(classSelection) {
+  async function handleClassSelection(classSelection) {
     if (name === "") {
       setDisabled(true);
       return;
     }
+
+    await axios.post("/api/stats/charactersCreated");
 
     if (classSelection === "warrior") {
       setPlayer(CreateWarrior);

@@ -1,5 +1,6 @@
 import "../css/styles.css";
 import { useState } from "react";
+import axios from "axios";
 
 import background from "../components/assets/images/mainscene/background.png";
 import ClassCreation from "../components/scenes/ClassCreation";
@@ -10,6 +11,10 @@ function MyApp({ Component, pageProps }) {
   const [init, setInit] = useState(false);
 
   const renderStartGame = () => {
+    const handleStartGame = async () => {
+      setInit(true);
+      await axios.post("/api/stats/visits");
+    };
     return (
       <div className="map-container">
         <img
@@ -27,7 +32,10 @@ function MyApp({ Component, pageProps }) {
               justifyContent: "center",
             }}
           >
-            <button className="start-game-btn" onClick={() => setInit(true)}>
+            <button
+              className="start-game-btn"
+              onClick={() => handleStartGame()}
+            >
               <h2>Start Game</h2>
             </button>
           </div>

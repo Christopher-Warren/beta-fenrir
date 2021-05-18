@@ -1,5 +1,5 @@
-import dbConnect from "../../../utils/dbConnect";
-import Stats from "../../../models/Stats";
+import dbConnect from "../../../../utils/dbConnect";
+import Stats from "../../../../models/Stats";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -7,24 +7,14 @@ export default async function handler(req, res) {
   await dbConnect();
 
   switch (method) {
-    case "GET":
-      try {
-        const stats = await Stats.findById(
-          "60a2d812297a9c4830ef578f"
-        ); /* find all the data in our database */
-        res.status(200).json({ success: true, data: stats });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-    case "PUT":
+    case "POST":
       try {
         const stats = await Stats.findById("60a2d812297a9c4830ef578f");
 
         const updatedStats = await Stats.findOneAndUpdate(
           "60a2d812297a9c4830ef578f",
           {
-            visits: stats.visits + 1,
+            bossesKilled: stats.bossesKilled + 1,
           }
         );
         res.status(201).json({ success: true, data: stats });
