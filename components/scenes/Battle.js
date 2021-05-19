@@ -46,10 +46,17 @@ export default function Battle({
     });
     spriteSheetRefArr.current = arr;
   }
-
+  console.log(player);
   const handleWin = async () => {
     if (location === "boss") {
       await axios.post("/api/stats/bossesKilled");
+      // bug
+      setPlayer((prevState) => {
+        return {
+          ...prevState,
+          bossStage: (prevState.bossStage += 1),
+        };
+      });
     }
     await axios.post("/api/stats/battlesWon");
 
@@ -110,7 +117,7 @@ export default function Battle({
 
   // Handles adding experience to the
   // player after battle
-  //
+  // bug
   useEffect(() => {
     if (showResults && player.curHP > 0) {
       if (location === "boss") {
@@ -135,7 +142,7 @@ export default function Battle({
       });
     }
 
-    if (showResults && player.curHP <= 0) {
+    if (showResults && player.curHP > 0) {
       if (location === "boss") {
         setPlayer((prevState) => {
           return {
