@@ -6,7 +6,7 @@ export const CreateWarrior = {
   playerClass: "warrior",
   classImg: "/sprites/select/warrior_select.png",
   name: "Almith",
-  level: 20,
+  level: 1,
   talentPoints: 1,
   talentArr: [
     {
