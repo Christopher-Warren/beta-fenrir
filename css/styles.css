@@ -88,6 +88,7 @@ canvas {
   cursor: pointer;
   outline: inherit;
   padding: 10px;
+  z-index: 50;
 
   margin-top: 30px;
   background-color: #18191a;
