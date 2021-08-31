@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "mongoose": "^5.9.13",
-    "next": "latest",
+    "next": "^11.1.2",
     "next-images": "^1.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
