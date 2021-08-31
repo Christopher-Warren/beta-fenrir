@@ -1,51 +1,51 @@
-import React, { useState } from "react";
-import MainScene from "./MainScene";
-import useCreatePlayer from "../utils/player/useCreatePlayer";
+import React, { useState } from 'react'
+import MainScene from './MainScene'
+import useCreatePlayer from '../utils/player/useCreatePlayer'
 
-import axios from "axios";
+import axios from 'axios'
 
-import background from "../assets/images/mainscene/background.png";
+import background from '../assets/images/mainscene/background.png'
 
-import warriorImg from "../assets/images/select/warrior_select.png";
-import rogueImg from "../assets/images/select/rogue_select.png";
-import mageImg from "../assets/images/select/mage_select.png";
+import warriorImg from '../assets/images/select/warrior_select.png'
+import rogueImg from '../assets/images/select/rogue_select.png'
+import mageImg from '../assets/images/select/mage_select.png'
 
 import {
   CreateWarrior,
   CreateRogue,
   CreateMage,
-} from "../utils/player/playerClassOptions";
+} from '../utils/player/playerClassOptions'
 
 export default function CharacterSelect() {
-  const [player, setPlayer] = useCreatePlayer({});
-  const [name, setName] = useState("");
-  const [disabled, setDisabled] = useState(false);
+  const [player, setPlayer] = useCreatePlayer({})
+  const [name, setName] = useState('')
+  const [disabled, setDisabled] = useState(false)
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(true)
 
   async function handleClassSelection(classSelection) {
-    if (name === "") {
-      setDisabled(true);
-      return;
+    if (name === '') {
+      setDisabled(true)
+      return
     }
 
-    await axios.post("/api/stats/charactersCreated");
+    await axios.post('/api/stats/charactersCreated')
 
-    if (classSelection === "warrior") {
-      setPlayer(CreateWarrior);
+    if (classSelection === 'warrior') {
+      setPlayer(CreateWarrior)
       setPlayer((prev) => {
-        return { ...prev, name: name };
-      });
-    } else if (classSelection === "rogue") {
-      setPlayer(CreateRogue);
+        return { ...prev, name: name }
+      })
+    } else if (classSelection === 'rogue') {
+      setPlayer(CreateRogue)
       setPlayer((prev) => {
-        return { ...prev, name: name };
-      });
-    } else if (classSelection === "mage") {
-      setPlayer(CreateMage);
+        return { ...prev, name: name }
+      })
+    } else if (classSelection === 'mage') {
+      setPlayer(CreateMage)
       setPlayer((prev) => {
-        return { ...prev, name: name };
-      });
+        return { ...prev, name: name }
+      })
     }
   }
 
@@ -89,14 +89,14 @@ export default function CharacterSelect() {
             <div className="start-container">
               <div
                 style={{
-                  display: "flex",
+                  display: 'flex',
 
-                  justifyContent: "center",
+                  justifyContent: 'center',
                 }}
               >
                 <button
                   className="start-game-btn"
-                  style={{ bottom: "100px" }}
+                  style={{ bottom: '100px' }}
                   onClick={() => setModal(false)}
                 >
                   <h2>Create Class</h2>
@@ -105,7 +105,7 @@ export default function CharacterSelect() {
             </div>
           </div>
         </div>
-      );
+      )
     }
 
     return (
@@ -113,8 +113,8 @@ export default function CharacterSelect() {
         <img
           alt="Main Background"
           className="main-room-image"
-          style={{ objectPosition: "50% 60%" }}
-          src={background}
+          style={{ objectPosition: '50% 60%' }}
+          src={background.src}
         />
 
         <div className="creation-container">
@@ -128,21 +128,21 @@ export default function CharacterSelect() {
           <div className="button-container">
             <div className="img-wrapper">
               <img
-                src={warriorImg}
+                src={warriorImg.src}
                 className="select-class-img"
                 alt="Choose Class"
               ></img>
               <button
                 className="creation-btn"
                 disabled={disabled}
-                onClick={() => handleClassSelection("warrior")}
+                onClick={() => handleClassSelection('warrior')}
               >
                 <h1>Warrior</h1>
               </button>
             </div>
             <div className="img-wrapper">
               <img
-                src={rogueImg}
+                src={rogueImg.src}
                 disabled={disabled}
                 className="select-class-img"
                 alt="Choose Class"
@@ -150,7 +150,7 @@ export default function CharacterSelect() {
               <button
                 className="creation-btn"
                 disabled={disabled}
-                onClick={() => handleClassSelection("rogue")}
+                onClick={() => handleClassSelection('rogue')}
               >
                 <h1>Rogue</h1>
               </button>
@@ -158,29 +158,29 @@ export default function CharacterSelect() {
 
             <div className="img-wrapper">
               <img
-                src={mageImg}
+                src={mageImg.src}
                 className="select-class-img"
                 alt="Choose Class"
               ></img>
               <button
                 className="creation-btn"
                 disabled={disabled}
-                onClick={() => handleClassSelection("mage")}
+                onClick={() => handleClassSelection('mage')}
               >
                 <h1>Mage</h1>
               </button>
             </div>
             <div
               style={{
-                position: "absolute",
-                zIndex: "30",
-                top: "-80px",
+                position: 'absolute',
+                zIndex: '30',
+                top: '-80px',
               }}
             >
               <label
                 className="name-label"
                 htmlFor="name"
-                style={{ display: "block" }}
+                style={{ display: 'block' }}
               >
                 Character Name
               </label>
@@ -188,23 +188,23 @@ export default function CharacterSelect() {
                 id="name"
                 className="name-input"
                 value={name}
-                style={{ display: "block" }}
+                style={{ display: 'block' }}
                 onChange={(e) => {
-                  setDisabled(false);
-                  setName(e.target.value);
+                  setDisabled(false)
+                  setName(e.target.value)
                 }}
               />
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
   //loadMain()
-  const playerLoaded = Object.keys(player).length > 0;
+  const playerLoaded = Object.keys(player).length > 0
 
   function loadMain() {
-    return <MainScene player={player} setPlayer={setPlayer}></MainScene>;
+    return <MainScene player={player} setPlayer={setPlayer}></MainScene>
   }
-  return <div>{playerLoaded ? loadMain() : renderCharacterSelect()}</div>;
+  return <div>{playerLoaded ? loadMain() : renderCharacterSelect()}</div>
 }

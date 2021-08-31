@@ -1,35 +1,35 @@
-import "../css/styles.css";
-import { useState } from "react";
-import axios from "axios";
+import '../css/styles.css'
+import { useState } from 'react'
+import axios from 'axios'
 
-import background from "../components/assets/images/mainscene/background.png";
-import ClassCreation from "../components/scenes/ClassCreation";
+import background from '../components/assets/images/mainscene/background.png'
+import ClassCreation from '../components/scenes/ClassCreation'
 
-import Head from "next/head";
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
-  const [init, setInit] = useState(false);
+  const [init, setInit] = useState(false)
 
   const renderStartGame = () => {
     const handleStartGame = async () => {
-      setInit(true);
-      await axios.post("/api/stats/visits");
-    };
+      setInit(true)
+      await axios.post('/api/stats/visits')
+    }
     return (
       <div className="map-container">
         <img
           alt="Main Background"
           className="main-room-image"
-          style={{ objectPosition: "50% 60%" }}
-          src={background}
+          style={{ objectPosition: '50% 60%' }}
+          src={background.src}
         />
         <div className="start-container">
           <h1 className="fenrir">Fenrir</h1>
           <div
             style={{
-              display: "flex",
+              display: 'flex',
 
-              justifyContent: "center",
+              justifyContent: 'center',
             }}
           >
             <button
@@ -41,12 +41,12 @@ function MyApp({ Component, pageProps }) {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="canvas">{init ? <ClassCreation /> : renderStartGame()}</div>
-  );
+  )
   return (
     <>
       <Head>
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
       //
       <div className="">Nothing</div>
     </>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
